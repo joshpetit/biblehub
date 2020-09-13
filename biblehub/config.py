@@ -13,5 +13,10 @@ def format_verse(reference, text) -> str:
     )
 
 
+def format_reference(reference) -> str:
+    return "{blue}{reference}{normal}".format(blue=COLORS.blue,
+                                              reference=reference, normal=COLORS.normal)
+
+
 def format_header(text) -> str:
     return "\n{header}{text}{normal}\n".format(header=COLORS.header, text=text, normal=COLORS.normal)

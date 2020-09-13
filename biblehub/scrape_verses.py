@@ -206,7 +206,8 @@ def get_versions(reference: str) -> list:
     whole = page.find("div", {"id": "par"})
     versions = whole.find_all_next("span", "versiontext")
     for version in versions:
-        thing = version.a.attrs['href'][1:4]
-        passage = _get_passage(whole, thing)
-        response.append({"version": thing.upper(), "passage": passage})
+        reference = version.a.attrs['href'][1:4]
+        reference = config.format_reference(reference)
+        passage = _get_passage(whole, reference)
+        response.append({"version": reference.upper(), "passage": passage})
     return response
