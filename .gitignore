@@ -3,3 +3,4 @@ BibleHubScrapper.iml
 build/
 dist/
 biblehub.iml
+biblehub/__pycache__/
