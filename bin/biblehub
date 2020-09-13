@@ -1,0 +1,39 @@
+#!/usr/bin/python3.8
+import argparse
+from biblehub import get_versions, query
+
+
+def run(args):
+    if args.versions:
+        print(get_versions(args.query))
+    else:
+        try:
+            print(query(' '.join(args.query), version=args.version, get_lexicons=args.all | args.l,
+                        get_crfs=args.all | args.c, get_tsks=args.all | args.t))
+        except ValueError:
+            print('Value Error')
+            print('Query for ' + ' '.join(args.query) + ' failed')
+        except IndexError:
+            print('Query for ' + ' '.join(args.query) + ' failed')
+            print('Did you type in the reference correctly?\nFormat Examples: 1 Corinthians 1:2, genesis 2:4')
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Query Biblehub.com and retrieve the verse.'
+                                                 'Use the flag -a to fetch all available information on the reference')
+    parser.add_argument('query', nargs='+', type=str, help='The Bible Reference to retrieve. Only Book #:# format '
+                                                           'accepted. (i.e Genesis 1:1, case insensitive)')
+    parser.add_argument('-v', '--version', nargs='?', default='niv', help='The version of the bible to be retrieved, '
+                                                                          'Defaults to NIV')
+    parser.add_argument('-c', '--cross-refs', dest='c', action='store_true', help='Fetch the cross references')
+    parser.add_argument('-t', '--treasury-scripture', dest='t', action='store_true',
+                        help='Fetch the treasury of scripture')
+    parser.add_argument('-l', '--lexicon', dest='l', action='store_true', help='Fetch the lexicon')
+    parser.add_argument('-a', '--all', action='store_true', help='Fetch all available information on scripture')
+    parser.add_argument('--versions', dest='versions', action='store_true', help='Fetch all available versions')
+    args = parser.parse_args()
+    run(args)
+
+
+if __name__ == "__main__":
+    main()
