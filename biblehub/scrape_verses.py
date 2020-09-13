@@ -199,15 +199,18 @@ def query(reference: str, version="niv", get_tsks=True, get_crfs=True, get_lexic
     return hub_query
 
 
-def get_versions(reference: str) -> list:
+def get_versions(reference: str, recolor=True) -> list:
     response = []
     url = _format_query(reference)
     page = _query_site(url)
     whole = page.find("div", {"id": "par"})
     versions = whole.find_all_next("span", "versiontext")
     for version in versions:
-        reference = version.a.attrs['href'][1:4]
-        reference = config.format_reference(reference)
-        passage = _get_passage(whole, reference)
-        response.append({"version": reference.upper(), "passage": passage})
+        version = version.a.attrs['href'][1:4]
+        passage = _get_passage(whole, version)
+        version = version.upper()
+        if recolor:
+            version = config.format_reference(version)
+            reference = config.format_header(reference).strip()
+        response.append({"version": version, "passage": passage, "reference": reference})
     return response

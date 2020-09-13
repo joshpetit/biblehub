@@ -4,12 +4,17 @@ from biblehub import get_versions, query
 
 
 def run(args):
+    args.query = ' '.join(args.query)
     if args.versions:
-        for verse in get_versions(args.query):
-            print(verse["version"] + '\n' + verse["passage"])
+        versions = get_versions(args.query, recolor=True)
+        print(versions[0]["reference"])
+        for version in versions:
+            print(version["version"])
+            print(version["passage"])
+        exit(0)
     else:
         try:
-            print(query(' '.join(args.query), version=args.version, get_lexicons=args.all | args.l,
+            print(query(args.query, version=args.version, get_lexicons=args.all | args.l,
                         get_crfs=args.all | args.c, get_tsks=args.all | args.t))
         except ValueError:
             print('Value Error')
