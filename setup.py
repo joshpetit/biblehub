@@ -21,5 +21,5 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     scripts=['bin/biblehub'],
-    obsoletes_dist="BibleHubScrapper (<1.3.5)"
+    obsolete_dist="BibleHubScrapper (<1.3.5)"
 )

@@ -4,3 +4,5 @@ build/
 dist/
 biblehub.iml
 biblehub/__pycache__/
+biblehub.egg-info/
+dist/

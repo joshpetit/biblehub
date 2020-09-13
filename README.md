@@ -1,9 +1,9 @@
-# BibleHubScrapper
-A python module that retrieve a single verse and the information on it from biblehub.com.
-Also a simple commandline application
+# biblehub
+A python module (Formerly BibleHubScrapper) that retrieve a single verse and the information on it from biblehub.com.
+Also a simple commandline application.
 
 ## Installation
-```pip3 install BibleHubScrapper```
+```pip3 install biblehub```
 
 ## Commandline
 To retrieve all the currently available information on a reference, use the '-a' tag:
@@ -22,7 +22,7 @@ biblehub -cl [Reference] # Retrieves the cross-references and lexicon in additio
 ## Script Usage
 You can import the query method to use in scripts.
 ```
-from BibleHubScrapper import query
+from biblehub import query
 
 biblehub_query = query('Genesis 1:1')
 print(biblehub_query.text) # In the beginning...
