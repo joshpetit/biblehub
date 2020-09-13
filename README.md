@@ -19,13 +19,19 @@ As with most cli tools, arguments can be stacked with one hyphen, such as:
 ```
 biblehub -cl [Reference] # Retrieves the cross-references and lexicon in addition to the passage
 ```
-## Script Usage
-You can import the query method to use in scripts.
+To retrieve all the versions for that reference, use the `--versions` tag
 ```
-from biblehub import query
+biblehub --versions Genesis 2:4
+```
+## Script Usage
+You can import the query and get_versions methods to use in scripts.
+```
+from biblehub import query, get_versions
 
 biblehub_query = query('Genesis 1:1')
+all_versions = get_versions('Genesis 1:1')
 print(biblehub_query.text) # In the beginning...
+print(all_versions[0].passage)
 ```
 By default, it will query all possible fields.
 You can choose not to query certain fields by indicating in the parameters
