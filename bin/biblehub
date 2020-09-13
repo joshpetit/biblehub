@@ -5,7 +5,8 @@ from biblehub import get_versions, query
 
 def run(args):
     if args.versions:
-        print(get_versions(args.query))
+        for verse in get_versions(args.query):
+            print(verse["version"] + '\n' + verse["passage"])
     else:
         try:
             print(query(' '.join(args.query), version=args.version, get_lexicons=args.all | args.l,
