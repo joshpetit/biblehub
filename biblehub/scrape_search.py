@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 
 
-
 def search(query: str):
     response = []
     request = requests.get("https://biblehub.net/search.php?q=%s" % query)
@@ -22,7 +21,6 @@ def search(query: str):
         end = string.find("//biblehub.com")
         excerpt = string[0:end].strip().replace("\n", "").replace("                    ", "")
         response.append({"reference": reference, "preview": bshort, "excerpt": excerpt})
-    print(response)
+    return response
 
 
-search("jude")
