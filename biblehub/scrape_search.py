@@ -2,14 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def _query_site(url) -> BeautifulSoup:
-    result = requests.get(url)
-    return BeautifulSoup(result.content, "lxml")
-
 
 def search(query: str):
     response = []
-    page = _query_site("https://biblehub.net/search.php?q=%s" % query)
+    request = requests.get("https://biblehub.net/search.php?q=%s" % query)
+    page = BeautifulSoup(request.content, "lxml")
     whole = page.find("div", {"id": "leftbox"}).find_next("div").find_next("div")
     results = whole.find_all("p", {"class": "g"})
     for result in results:
