@@ -13,7 +13,12 @@ def run(args):
             print(version["passage"])
         exit(0)
     elif args.search:
-        list = search(args.query)
+        search_filter = ''
+        if args.nt:
+            search_filter = 'nt'
+        elif args.ot:
+            search_filter = 'ot'
+        list = search(args.query, search_filter=search_filter)
         for item in list:
             print(config.format_reference(item["reference"]))
             print(item["preview"])
@@ -43,8 +48,13 @@ def main():
     parser.add_argument('-l', '--lexicon', dest='l', action='store_true', help='Fetch the lexicon')
     parser.add_argument('-a', '--all', action='store_true', help='Fetch all available information on scripture')
     parser.add_argument('--versions', dest='versions', action='store_true', help='Fetch all available versions')
+
     parser.add_argument('--search', dest='search', action='store_true', help='Search biblehub.com for verses that '
                                                                              'match your query')
+    parser.add_argument('--ot', '--old-testament', dest='ot', action='store_true', help='Restrict search to the old '
+                                                                                        'testament')
+    parser.add_argument('--nt', '--new-testament', dest='nt', action='store_true', help='Restrict search to the new '
+                                                                                        'testament')
     args = parser.parse_args()
     run(args)
 
