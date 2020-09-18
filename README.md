@@ -11,26 +11,26 @@ To retrieve all the currently available information on a reference, use the '-a'
 `biblehub find -a [Reference]`
 
 To only retrieve specific information, pass in the corresponding tag:
-```{shell script}
+```shell script
 biblehub find -c [Reference] # Also retrieves the cross-references
 biblehub find -t [Reference] # Also retrieves the lexicon
 ```
 As with most cli tools, arguments can be stacked with one hyphen, such as:
-```{shell script}
+```shell script
 biblehub find -cl [Reference] # Retrieves the cross-references and lexicon in addition to the passage
 ```
 To retrieve all the versions for that reference, use the `--versions` tag
-```{shell script}
+```shell script
 biblehub find --versions Genesis 2:4
 ```
 To search biblehub use the `search` command
-```{shell script}
+```shell script
 biblehub search Goliath
 ```
 Contains optional arguments `--ot` and `--nt` to limit the results to the old or new testaments
 ## Script Usage
 You can import the query and get_versions methods to use in scripts.
-```{python}
+```python
 from biblehub import query, get_versions
 
 biblehub_query = query('Genesis 1:1')
@@ -44,7 +44,7 @@ for example:
 ` query('Genesis 1:1', get_lexicons=False) `
 
 ## Useful fields
-```{python}
+```python
 print(biblehub_query.passage) # Genesis 1:1
 print(biblehub_query.version) # NIV (default)
 print(biblehub_query.lexicons) # Text, Hebrew words, translit, strong, and English defintions
@@ -54,7 +54,7 @@ print(biblehub_query.info) # Prints all the info queried on the verse. Also the 
 ```
 there are also `biblehub_query.format_[field]` method that returns the specified field in an easy to read way.
 ### Searching
-```{python}
+```python
 from biblehub import search as b_search
 list = b_search("Goliath", filter='nt')
 ```
