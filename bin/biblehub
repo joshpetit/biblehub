@@ -1,6 +1,6 @@
 #!/usr/bin/python3.8
 import argparse
-from biblehub import get_versions, query
+from biblehub import get_versions, query, search
 
 
 def run(args):
@@ -12,6 +12,11 @@ def run(args):
             print(version["version"])
             print(version["passage"])
         exit(0)
+    elif args.search:
+        list = search(args.query)
+        for item in list:
+            print(item["reference"] + "\n" + item["preview"])
+            print(item["excerpt"] + "\n")
     else:
         try:
             print(query(args.query, version=args.version, get_lexicons=args.all | args.l,
@@ -37,6 +42,8 @@ def main():
     parser.add_argument('-l', '--lexicon', dest='l', action='store_true', help='Fetch the lexicon')
     parser.add_argument('-a', '--all', action='store_true', help='Fetch all available information on scripture')
     parser.add_argument('--versions', dest='versions', action='store_true', help='Fetch all available versions')
+    parser.add_argument('--search', dest='search', action='store_true', help='Search biblehub.com for verses that '
+                                                                             'match your query')
     args = parser.parse_args()
     run(args)
 
