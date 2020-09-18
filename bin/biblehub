@@ -1,6 +1,6 @@
 #!/usr/bin/python3.8
 import argparse
-from biblehub import get_versions, query, search
+from biblehub import get_versions, query, search, config
 
 
 def run(args):
@@ -15,8 +15,9 @@ def run(args):
     elif args.search:
         list = search(args.query)
         for item in list:
-            print(item["reference"] + "\n" + item["preview"])
-            print(item["excerpt"] + "\n")
+            print(config.format_reference(item["reference"]))
+            print(item["preview"])
+            print(item["excerpt"])
     else:
         try:
             print(query(args.query, version=args.version, get_lexicons=args.all | args.l,

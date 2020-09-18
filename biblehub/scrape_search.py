@@ -22,5 +22,3 @@ def search(query: str):
         excerpt = string[0:end].strip().replace("\n", "").replace("                    ", "")
         response.append({"reference": reference, "preview": bshort, "excerpt": excerpt})
     return response
-
-
