@@ -1,6 +1,6 @@
 #!/usr/bin/python3.8
 import argparse
-from biblehub import get_versions, query, search, config
+from biblehub import get_versions, find_verse, search, config
 
 
 def run(args):
@@ -15,8 +15,8 @@ def run(args):
             exit(0)
         else:
             try:
-                print(query(args.query, version=args.version, get_lexicons=args.all | args.l,
-                            get_crfs=args.all | args.c, get_tsks=args.all | args.t))
+                print(find_verse(args.query, version=args.version, get_lexicons=args.all | args.l,
+                                 get_crfs=args.all | args.c, get_tsks=args.all | args.t))
             except ValueError:
                 print('Value Error')
                 print('Query for ' + ' '.join(args.query) + ' failed')
@@ -29,8 +29,8 @@ def run(args):
             search_filter = 'nt'
         elif args.ot:
             search_filter = 'ot'
-        list = search(args.query, search_filter=search_filter)
-        for item in list:
+        query_results = search(args.query, search_filter=search_filter)
+        for item in query_results:
             print(config.format_reference(item["reference"]))
             print(item["preview"])
             print(item["excerpt"])
