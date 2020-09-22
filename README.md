@@ -31,9 +31,9 @@ Contains optional arguments `--ot` and `--nt` to limit the results to the old or
 ## Script Usage
 You can import the query and get_versions methods to use in scripts.
 ```python
-from biblehub import query, get_versions
+from biblehub import find_verse, get_versions
 
-biblehub_query = query('Genesis 1:1')
+biblehub_query = find_verse('Genesis 1:1')
 all_versions = get_versions('Genesis 1:1')
 print(biblehub_query.text) # In the beginning...
 print(all_versions[0].passage)
@@ -41,7 +41,7 @@ print(all_versions[0].passage)
 By default, it will query all possible fields.
 You can choose not to query certain fields by indicating in the parameters
 for example:
-` query('Genesis 1:1', get_lexicons=False) `
+` find_verse('Genesis 1:1', get_lexicons=False) `
 
 ## Useful fields
 ```python

@@ -2,7 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def search(query: str, search_filter=""):
+def search(query: str, search_filter="") -> list:
+    """Retrieve search results from biblehub.com
+
+    :param query: The search keywords
+    :param search_filter: either nt or ot
+    :return: A list of the search results
+    :rtype: list
+    """
     response = []
     request = requests.get("https://biblehub.net/search%s.php?q=%s" % (search_filter, query))
     page = BeautifulSoup(request.content, "lxml")

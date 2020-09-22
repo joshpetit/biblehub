@@ -170,7 +170,7 @@ def _get_passage(whole, version) -> str:
     return verse
 
 
-def query(reference: str, version="niv", get_tsks=True, get_crfs=True, get_lexicons=True) -> BibleHubQuery:
+def find_verse(reference: str, version="niv", get_tsks=True, get_crfs=True, get_lexicons=True) -> BibleHubQuery:
     """Returns up to **one** verse along with the information provided by Biblehub
 
     :param reference: The reference to be parsed (i.e Genesis 1:1)
@@ -200,6 +200,14 @@ def query(reference: str, version="niv", get_tsks=True, get_crfs=True, get_lexic
 
 
 def get_versions(reference: str, recolor=True) -> list:
+    """ Returns all the versions for a particular verse
+
+   :param reference: The passage to look for
+   :param recolor: Whether to color the verses (soon to be deprecated)
+
+   :return A list of all the versions
+   :rtype: list
+    """
     response = []
     url = _format_query(reference)
     page = _query_site(url)
