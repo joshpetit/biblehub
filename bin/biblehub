@@ -1,7 +1,6 @@
 #!/usr/bin/python3.8
 import argparse
-from biblehub import get_versions, find_verse, search, config
-
+from biblehub import get_versions, find_verse, search, styling
 
 def run(args):
     args.query = ' '.join(args.query)

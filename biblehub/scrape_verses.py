@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from biblehub import config
+from biblehub import styling
 
 
 class BibleHubQuery:
@@ -30,13 +30,13 @@ class BibleHubQuery:
     def _init_info(self) -> None:
         response = self.format_verse()
         if self.crfs:
-            response += "{header}{crfs}".format(header=config.format_header("Cross References"),
+            response += "{header}{crfs}".format(header=styling.format_header("Cross References"),
                                                 crfs=self.format_crfs())
         if self.tsks:
-            response += "{header}{tsks}".format(header=config.format_header("Treasury Of Scripture"),
+            response += "{header}{tsks}".format(header=styling.format_header("Treasury Of Scripture"),
                                                 tsks=self.format_tsks())
         if self.lexicons:
-            response += "{header}{lexicon}".format(header=config.format_header("Lexicon"),
+            response += "{header}{lexicon}".format(header=styling.format_header("Lexicon"),
                                                    lexicon=self.format_lexicons())
         self.info = response
 
@@ -46,7 +46,7 @@ class BibleHubQuery:
     def format_crfs(self) -> str:
         response = ''
         for crf in self.crfs:
-            response += config.format_verse(crf['reference'], crf['text'])
+            response += styling.format_verse(crf['reference'], crf['text'])
         return response
 
     def format_tsks(self) -> str:
@@ -56,7 +56,7 @@ class BibleHubQuery:
         return '\n'.join(response) + '\n'
 
     def format_verse(self) -> str:
-        return config.format_verse('{reference} ({version})'.format(reference=self.passage, version=self.version),
+        return styling.format_verse('{reference} ({version})'.format(reference=self.passage, version=self.version),
                                    self.text)
 
     def format_lexicons(self) -> str:
@@ -218,7 +218,7 @@ def get_versions(reference: str, recolor=True) -> list:
         passage = _get_passage(whole, version)
         version = version.upper()
         if recolor:
-            version = config.format_reference(version)
-            reference = config.format_header(reference).strip()
+            version = styling.format_reference(version)
+            reference = styling.format_header(reference).strip()
         response.append({"version": version, "passage": passage, "reference": reference})
     return response
