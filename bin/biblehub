@@ -30,7 +30,7 @@ def run(args):
             search_filter = 'ot'
         query_results = search(args.query, search_filter=search_filter)
         for item in query_results:
-            print(config.format_reference(item["reference"]))
+            print(styling.format_reference(item["reference"]))
             print(item["preview"])
             print(item["excerpt"])
 
