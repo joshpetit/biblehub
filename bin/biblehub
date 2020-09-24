@@ -18,9 +18,9 @@ def run(args):
                                  get_crfs=args.all | args.c, get_tsks=args.all | args.t))
             except ValueError:
                 print('Value Error')
-                print('Query for ' + ' '.join(args.query) + ' failed')
+                print('Verse query for ' + ''.join(args.query) + ' failed')
             except IndexError:
-                print('Query for ' + ' '.join(args.query) + ' failed')
+                print('Query for ' + ''.join(args.query) + ' failed')
                 print('Did you type in the reference correctly?\nFormat Examples: 1 Corinthians 1:2, genesis 2:4')
     elif args.command == 'search':
         search_filter = ''
