@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biblehub",
-    version="2.0.0a0",
+    version="2.0a0",
     author="Joshua Petitma",
     author_email="joshuapetitma@yahoo.com",
     description="A module to scrape biblehub.com, also cli app",

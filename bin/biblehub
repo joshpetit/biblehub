@@ -42,6 +42,7 @@ def main():
     find_verse = subparsers.add_parser('find')
     search_verses = subparsers.add_parser('search')
 
+    # find command
     find_verse.add_argument('query', nargs='+', type=str, help='The Bible Reference to retrieve. Only Book #:# format '
                                                                'accepted. (i.e Genesis 1:1, case insensitive)')
     find_verse.add_argument('-v', '--version', nargs='?', default='niv',
@@ -54,14 +55,12 @@ def main():
     find_verse.add_argument('-a', '--all', action='store_true', help='Fetch all available information on scripture')
     find_verse.add_argument('--versions', dest='versions', action='store_true', help='Fetch all available versions')
 
-    search_verses.add_argument('query', nargs='+', type=str, help='Search biblehub.com for verses that '
-                                                                  'match your query')
+    # search command
+    search_verses.add_argument('query', nargs='+', type=str, help='The key words to query biblehub.com for')
     search_verses.add_argument('--ot', '--old-testament', dest='ot', action='store_true',
-                               help='Restrict search to the old '
-                                    'testament')
+                               help='Restrict search to the old testament')
     search_verses.add_argument('--nt', '--new-testament', dest='nt', action='store_true',
-                               help='Restrict search to the new '
-                                    'testament')
+                               help='Restrict search to the new testament')
     args = parser.parse_args()
     run(args)
 
