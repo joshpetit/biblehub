@@ -13,6 +13,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/joshpetit/biblehub",
     packages=setuptools.find_packages(),
+    install_requires=[
+      'bs4',
+      'pypassage'
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",

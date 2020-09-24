@@ -57,7 +57,7 @@ class BibleHubQuery:
 
     def format_verse(self) -> str:
         return styling.format_verse('{reference} ({version})'.format(reference=self.passage, version=self.version),
-                                   self.text)
+                                    self.text)
 
     def format_lexicons(self) -> str:
         response = []
