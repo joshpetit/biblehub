@@ -6,7 +6,7 @@ def run(args):
     args.query = ' '.join(args.query)
     if args.command == 'find':
         if args.versions:
-            versions = get_versions(args.query, recolor=True)
+            versions = get_versions(args.query, recolor=true)
             print(versions[0]["reference"])
             for version in versions:
                 print(version["version"])
@@ -16,12 +16,12 @@ def run(args):
             try:
                 print(find_verse(args.query, version=args.version, get_lexicons=args.all | args.l,
                                  get_crfs=args.all | args.c, get_tsks=args.all | args.t))
-            except ValueError:
-                print('Value Error')
-                print('Verse query for ' + ''.join(args.query) + ' failed')
-            except IndexError:
-                print('Query for ' + ''.join(args.query) + ' failed')
-                print('Did you type in the reference correctly?\nFormat Examples: 1 Corinthians 1:2, genesis 2:4')
+            except valueerror:
+                print('value error')
+                print('verse query for ' + ''.join(args.query) + ' failed')
+            except indexerror:
+                print('query for ' + ''.join(args.query) + ' failed')
+                print('did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
     elif args.command == 'search':
         search_filter = ''
         if args.nt:
