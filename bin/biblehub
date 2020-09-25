@@ -14,13 +14,14 @@ def run(args):
                 print(version["version"])
                 print(version["passage"])
             exit(0)
+        # Find passage
         elif ':' not in args.query or '-' in args.query:
             res = find_passage(args.query, version=args.version)
             verses = res['verses']
             keys = verses.keys()
-            print(res['reference'])
+            print(styling.format_reference(res['reference']+' (%s)' % args.version.upper()))
             for key in keys:
-                print(str(key) + ' ' + res['verses'][key])
+                print(styling.format_reference(str(key))+ ' ' + res['verses'][key])
         else:
             try:
                 print(find_verse(args.query, version=args.version, get_lexicons=args.all | args.l,
