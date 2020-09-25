@@ -3,7 +3,7 @@ import re
 
 def parse_str(reference: str) -> dict:
     response = {}
-    parsed = re.search('(\\d? ?\\w+) (\\d)(:(\\d+)-(\\d+))?', reference)
+    parsed = re.search('(\\d? ?\\w+) (\\d+)(:(\\d+)-(\\d+))?', reference)
     response['book'] = parsed.group(1).lower()
     response['chapter'] = int(parsed.group(2))
     response['start_verse'] = 1
