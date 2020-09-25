@@ -1,14 +1,27 @@
 # biblehub
-A python module (Formerly BibleHubScrapper) that retrieve a single verse and the information on it from biblehub.com.
+A python module (Formerly BibleHubScrapper) that retrieve vesand the information on it from biblehub.com.
 Also a simple commandline application.
 
 ## Installation
 ```pip3 install biblehub```
 
 ## Commandline
+Find verses simply using the `find` command
+
+```shell script
+biblehub find Matthew 2:4
+```
+
+Supports retrieving single verses, multiple verses, and chapters, but that's standard, a more useful feature is
+returning the information (cross reference, lexicons, and treasury of scripture)
+
 To retrieve all the currently available information on a reference, use the '-a' tag:
 
 `biblehub find -a [Reference]`
+
+*Note:* Information is only available for single verse references (i.e  *Genesis 1:1*), 
+multiverse references(i.e *Genesis 1:1-2*) will not return information on 
+each verse yet.
 
 To only retrieve specific information, pass in the corresponding tag:
 ```shell script
