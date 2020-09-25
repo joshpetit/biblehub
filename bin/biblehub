@@ -1,27 +1,36 @@
 #!/usr/bin/python3.8
 import argparse
-from biblehub import get_versions, find_verse, search, styling
+from biblehub import get_versions, find_verse, search, styling, parse_str, find_passage
+
 
 def run(args):
     args.query = ' '.join(args.query)
     if args.command == 'find':
+        verse = parse_str(args.query)
         if args.versions:
-            versions = get_versions(args.query, recolor=true)
+            versions = get_versions(args.query, recolor=True)
             print(versions[0]["reference"])
             for version in versions:
                 print(version["version"])
                 print(version["passage"])
             exit(0)
+        elif ':' not in args.query or '-' in args.query:
+            res = find_passage(args.query, version=args.version)
+            verses = res['verses']
+            keys = verses.keys()
+            print(res['reference'])
+            for key in keys:
+                print(str(key) + ' ' + res['verses'][key])
         else:
             try:
                 print(find_verse(args.query, version=args.version, get_lexicons=args.all | args.l,
                                  get_crfs=args.all | args.c, get_tsks=args.all | args.t))
-            except valueerror:
-                print('value error')
-                print('verse query for ' + ''.join(args.query) + ' failed')
-            except indexerror:
+            except ValueError:
+                print('Value error')
+                print('Verse query for ' + ''.join(args.query) + ' failed')
+            except IndexError:
                 print('query for ' + ''.join(args.query) + ' failed')
-                print('did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
+                print('Did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
     elif args.command == 'search':
         search_filter = ''
         if args.nt:
