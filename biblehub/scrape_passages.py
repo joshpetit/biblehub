@@ -4,7 +4,7 @@ from biblehub.scrape_utils import parse_str
 
 
 # TODO: Optimize with obj parameter
-def find_passage(reference: str, version='niv') -> list:
+def find_passage(reference: str, version='niv') -> dict:
     """
     Find multiple verses in a single chapter, or an entire chapter
     :param reference: The reference to find on biblehub
