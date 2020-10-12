@@ -1,4 +1,4 @@
-#!/usr/bin/python3.8
+#!/usr/bin/env python3.8
 import argparse
 from biblehub import get_versions, find_verse, search, styling, parse_str, find_passage
 
