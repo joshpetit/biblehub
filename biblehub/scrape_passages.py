@@ -25,6 +25,12 @@ def find_passage(reference: str, version='niv') -> dict:
         verses = verses[0: reference['end_verse'] - reference['start_verse'] + 1]
     for verse in verses:
         num = int(verse.get_text())
-        verse = verse.next_sibling.strip()
-        response['verses'][num] = verse
+        verse_text = verse.next_sibling.strip()
+        verse = verse.parent.next_sibling
+        while verse is not None and verse.name is not None:
+            print(verse)
+            verse_text += '\n' + verse.get_text()
+            verse = verse.parent.next_sibling
+        response['verses'][num] = verse_text
     return response
+# NavigableString.
