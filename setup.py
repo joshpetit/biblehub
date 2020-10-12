@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/joshpetit/biblehub",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(','),
     install_requires=[
       'bs4',
       'pypassage'
@@ -24,6 +24,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    scripts=['bin/biblehub'],
+    scripts=['scripts/biblehub'],
     obsolete_dist="BibleHubScrapper (<1.3.5)"
 )

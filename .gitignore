@@ -6,3 +6,10 @@ biblehub.iml
 biblehub/__pycache__/
 biblehub.egg-info/
 dist/
+pyvenv.cfg
+lib
+share
+include
+bin
+.gradle
+lib64
