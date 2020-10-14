@@ -32,4 +32,3 @@ def find_passage(reference: str, version='niv') -> dict:
             verse = verse.parent.next_sibling
         response['verses'][num] = verse_text
     return response
-# NavigableString.
