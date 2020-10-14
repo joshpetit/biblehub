@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biblehub",
-    version="2.0a3",
+    version="2.0a5",
     author="Joshua Petitma",
     author_email="joshuapetitma@yahoo.com",
     description="A module to scrape biblehub.com, also cli app",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/joshpetit/biblehub",
-    packages=setuptools.find_packages(','),
+    packages=setuptools.find_packages(),
     install_requires=[
       'bs4',
       'pypassage'
@@ -25,5 +25,5 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     scripts=['scripts/biblehub'],
-    obsolete_dist="BibleHubScrapper (<1.3.5)"
+    obsoleteDist="BibleHubScrapper (<1.3.5)"
 )
