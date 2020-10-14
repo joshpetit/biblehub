@@ -64,15 +64,17 @@ def run(args):
     args.query = ' '.join(args.query)
     if args.command == 'find':
         verse = parse_str(args.query)
-        if verse['book'].lower() not in ['psalms', 'songs']:
-            try:
-                parsed_passage = Passage(book=verse['book'], start_chapter=verse['chapter'],
-                                         start_verse=verse['start_verse'],
-                                         end_verse=verse['end_verse'])
-                args.query = parsed_passage.__str__()
-                print(args.query)
-            except pypassage.InvalidPassageException:
-                pass
+        try:
+            parsed_book = Passage(book=verse['book'])
+            print(parsed_book.__str__())
+            if parsed_book.__str__().lower() == 'psalms':
+                raise pypassage.InvalidPassageException
+            parsed_passage = Passage(book=verse['book'], start_chapter=verse['chapter'],
+                         start_verse=verse['start_verse'],
+                         end_verse=verse['end_verse'])
+            args.query = parsed_passage.__str__()
+        except pypassage.InvalidPassageException:
+            pass
         if args.versions:
             exec_find_versions(args.query)
 
