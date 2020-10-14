@@ -1,48 +1,94 @@
 #!/usr/bin/env python3.8
 import argparse
+
+import pypassage
+from pypassage import Passage
 from biblehub import get_versions, find_verse, search, styling, parse_str, find_passage
+
+
+def exec_find_passage(query, version):
+    try:
+        res = find_passage(query, version=version)
+        verses = res['verses']
+        keys = verses.keys()
+        print(styling.format_reference(res['reference'] + ' (%s)' % version.upper()))
+        for key in keys:
+            print(styling.format_reference(str(key)) + ' ' + res['verses'][key])
+    except ValueError:
+        print('Value error')
+        print('Verse query for ' + ''.join(query) + ' failed')
+        exit(1)
+    except IndexError:
+        print('query for ' + ''.join(query) + ' failed')
+        print('Did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
+        exit(1)
+    except AttributeError:
+        print('Passage unable to be parsed, did you type in the reference correctly?')
+
+
+def exec_find_versions(query):
+    versions = get_versions(query, recolor=True)
+    print(versions[0]["reference"])
+    for version in versions:
+        print(version["version"])
+        print(version["passage"])
+    exit(0)
+
+
+def exec_find_verse(query, version, lexicon, cr, tr):
+    try:
+        print(find_verse(query, version=version, get_lexicons=lexicon,
+                         get_crfs=cr, get_tsks=tr))
+        exit(0)
+    except ValueError:
+        print('Value error')
+        print('Verse query for ' + ''.join(query) + ' failed')
+        exit(1)
+    except IndexError:
+        print('query for ' + ''.join(query) + ' failed')
+        print('Did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
+        exit(1)
+    except AttributeError:
+        print('Passage unable to be parsed, did you type in the reference correctly?')
+
+
+def exec_search(query, search_filter):
+    query_results = search(query, search_filter=search_filter)
+    for item in query_results:
+        print(styling.format_reference(item["reference"]))
+        print(item["preview"])
+        print(item["excerpt"])
 
 
 def run(args):
     args.query = ' '.join(args.query)
     if args.command == 'find':
         verse = parse_str(args.query)
+        if verse['book'].lower() not in ['psalms', 'songs']:
+            try:
+                parsed_passage = Passage(book=verse['book'], start_chapter=verse['chapter'],
+                                         start_verse=verse['start_verse'],
+                                         end_verse=verse['end_verse'])
+                args.query = parsed_passage.__str__()
+                print(args.query)
+            except pypassage.InvalidPassageException:
+                pass
         if args.versions:
-            versions = get_versions(args.query, recolor=True)
-            print(versions[0]["reference"])
-            for version in versions:
-                print(version["version"])
-                print(version["passage"])
-            exit(0)
+            exec_find_versions(args.query)
+
         # Find passage
         elif ':' not in args.query or '-' in args.query:
-            res = find_passage(args.query, version=args.version)
-            verses = res['verses']
-            keys = verses.keys()
-            print(styling.format_reference(res['reference']+' (%s)' % args.version.upper()))
-            for key in keys:
-                print(styling.format_reference(str(key))+ ' ' + res['verses'][key])
+            exec_find_passage(args.query, args.version)
         else:
-            try:
-                print(find_verse(args.query, version=args.version, get_lexicons=args.all | args.l,
-                                 get_crfs=args.all | args.c, get_tsks=args.all | args.t))
-            except ValueError:
-                print('Value error')
-                print('Verse query for ' + ''.join(args.query) + ' failed')
-            except IndexError:
-                print('query for ' + ''.join(args.query) + ' failed')
-                print('Did you type in the reference correctly?\nformat examples: 1 corinthians 1:2, genesis 2:4')
+            exec_find_verse(args.query, args.version, args.all | args.l,
+                            args.all | args.c, args.all | args.t)
     elif args.command == 'search':
         search_filter = ''
         if args.nt:
             search_filter = 'nt'
         elif args.ot:
             search_filter = 'ot'
-        query_results = search(args.query, search_filter=search_filter)
-        for item in query_results:
-            print(styling.format_reference(item["reference"]))
-            print(item["preview"])
-            print(item["excerpt"])
+        exec_search(args.query, search_filter)
 
 
 def main():
