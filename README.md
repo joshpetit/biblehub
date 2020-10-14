@@ -118,4 +118,4 @@ develop tests earlier on and did not spend a lot of time on making the codebase 
 all of this just to make this statement:
 ### WRITE TESTS!!! They make life so much easier in the long term
 
-Find this helpful? Useful? Please let me know at [joshua@joshpetit.dev](joshua@joshpetit.dev)!
+Find this app helpful? Useful? Please let me know at [joshua@joshpetit.dev](joshua@joshpetit.dev)!
