@@ -6,11 +6,11 @@ def parse_str(reference: str) -> dict:
     parsed = re.search('([1-3]?[^\\s]+[A-Za-z ]+[^\\d ]) ?(\\d+)?:?(\\d+)?-?(\\d+)?', reference)
     response['book'] = parsed.group(1).lower()
     response['chapter'] = int(parsed.group(2))
-    response['start_verse'] = 1
+    response['start_verse'] = None
     response['end_verse'] = None
-    if parsed.group(3) is not None:
+    if parsed.group(3) is not None and int(parsed.group(3)) > 0:
         response['start_verse'] = int(parsed.group(3))
-    if parsed.group(4) is not None:
+    if parsed.group(4) is not None and int(parsed.group(4)) > 0:
         response['end_verse'] = int(parsed.group(4))
     return response
 
