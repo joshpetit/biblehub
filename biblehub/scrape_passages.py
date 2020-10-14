@@ -20,7 +20,7 @@ def find_passage(reference: str, version='niv') -> dict:
     page = BeautifulSoup(request.content, "lxml")
     chap = page.find("div", {"id": "leftbox"})
     verses = chap.find_all("span", {"class": "reftext"})
-    if reference['end_verse'] != -1:
+    if reference['end_verse'] is not None:
         verses = verses[reference['start_verse'] - 1:]
         verses = verses[0: reference['end_verse'] - reference['start_verse'] + 1]
     for verse in verses:
