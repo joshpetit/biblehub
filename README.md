@@ -15,8 +15,8 @@ from [biblehub](https://biblehub.com).
 - [Regrets](#regrets)
 
 ## Installation
-```pip3 install biblehub```
-
+```pip3 install --pre biblehub```
+Currently beta testing, some bugs must be reworked.
 ## CLI app
 
 ### Simple Queries
