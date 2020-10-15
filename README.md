@@ -16,6 +16,7 @@ from [biblehub](https://biblehub.com).
 
 ## Installation
 ```pip3 install --pre biblehub```
+
 Currently beta testing, some bugs must be reworked.
 ## CLI app
 
