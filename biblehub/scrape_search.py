@@ -12,7 +12,7 @@ def search(query: str, search_filter="") -> list:
     """
     response = []
     request = requests.get("https://biblehub.net/search%s.php?q=%s" % (search_filter, query))
-    page = BeautifulSoup(request.content, "lxml")
+    page = BeautifulSoup(request.content, "html.parser")
     whole = page.find("div", {"id": "leftbox"}).find_next("div").find_next("div")
     results = whole.find_all("p", {"class": "g"})
     for result in results:

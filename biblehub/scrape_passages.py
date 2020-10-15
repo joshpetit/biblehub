@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from biblehub.scrape_utils import parse_str
 
-
 # TODO: Optimize with obj parameter
 def find_passage(reference: str, version='niv') -> dict:
     """
@@ -17,7 +16,7 @@ def find_passage(reference: str, version='niv') -> dict:
     response['bnc'] = reference['book'].title() + ' ' + str(reference['chapter'])
     url = 'https://biblehub.com/%s/%s/%d.htm' % (version, reference['book'].replace(" ", "_"), reference['chapter'])
     request = requests.get(url)
-    page = BeautifulSoup(request.content, "lxml")
+    page = BeautifulSoup(request.content, "html.parser")
     chap = page.find("div", {"id": "leftbox"})
     verses = chap.find_all("span", {"class": "reftext"})
     if reference['end_verse'] is not None:
@@ -32,3 +31,4 @@ def find_passage(reference: str, version='niv') -> dict:
             verse = verse.parent.next_sibling
         response['verses'][num] = verse_text
     return response
+

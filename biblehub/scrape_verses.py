@@ -83,7 +83,7 @@ class _Lexicon:
 
 def _query_site(url) -> BeautifulSoup.find:
     result = requests.get(url)
-    return BeautifulSoup(result.content, "lxml")
+    return BeautifulSoup(result.content, "html.parser")
 
 
 def _format_query(text) -> str:
