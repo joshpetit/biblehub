@@ -24,8 +24,12 @@ def search(query: str, search_filter="") -> list:
         reference = string[0:end]
         bshort = string[end:].lstrip()
 
-        string = result.find_next_sibling().get_text()
+        try:
+            string = result.find_next_sibling().get_text()
+        except AttributeError:
+            pass
         end = string.find("//biblehub.com")
         excerpt = string[0:end].strip().replace("\n", "").replace("                    ", "")
         response.append({"reference": reference, "preview": bshort, "excerpt": excerpt})
     return response
+
